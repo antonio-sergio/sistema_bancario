@@ -155,6 +155,7 @@ public class Conta {
     public void transferir(int nmroContaDestino, double valor) {
         DAO<Conta> dao = new DAO<>(Conta.class);
         UsuarioDAO ud = new UsuarioDAO();
+        dao.atualizar(this);
         try {
             ContaPoupanca contaDestino = ud.getUsuarioPorContaPoupanca(nmroContaDestino);
             double saldoRemetente = this.saldo;
@@ -164,6 +165,7 @@ public class Conta {
                     this.setSaldo(saldoRemetente - valor);
                     contaDestino.setSaldo(saldoDestinatario + valor);
                     dao.atualizar(this);
+                    dao.atualizar(contaDestino);
                     JOptionPane.showMessageDialog(null, "Transferido " + valor + " para " + contaDestino.getCliente().getNome());
                 } else {
                     JOptionPane.showMessageDialog(null, "Operação não realizada pois excede o limite da conta do destinatário");
@@ -176,14 +178,15 @@ public class Conta {
         } catch (Exception e) {
         }
         try {
-            ContaCorrente contaDestino = ud.getUsuarioPorContaCorrente(nmroContaDestino);
+            ContaCorrente contaDestinoC = ud.getUsuarioPorContaCorrente(nmroContaDestino);
             double saldoRemetente = this.saldo;
-            double saldoDestinatario = contaDestino.getSaldo();
+            double saldoDestinatario = contaDestinoC.getSaldo();
             if (valor <= this.saldo) {
                 this.setSaldo(saldoRemetente - valor);
-                contaDestino.setSaldo(saldoDestinatario + valor);
+                contaDestinoC.setSaldo(saldoDestinatario + valor);
                 dao.atualizar(this);
-                JOptionPane.showMessageDialog(null, "Transferido " + valor + " para " + contaDestino.getCliente().getNome());
+                dao.atualizar(contaDestinoC);
+                JOptionPane.showMessageDialog(null, "Transferido " + valor + " para " + contaDestinoC.getCliente().getNome());
 
             } else {
                 JOptionPane.showMessageDialog(null, "Saldo insuficiente! Seu saldo é " + this.saldo);
@@ -191,7 +194,7 @@ public class Conta {
 
         } catch (Exception e) {
         }
-
+        
     }
 
 

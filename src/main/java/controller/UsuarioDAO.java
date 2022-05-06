@@ -13,8 +13,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
-import javax.swing.JOptionPane;
-import model.Conta;
+
 import model.ContaCorrente;
 import model.ContaPoupanca;
 
@@ -85,25 +84,7 @@ public class UsuarioDAO {
         }
     }
 
-//    public boolean inserirUsuario(Cliente usuario) {
-//        try {
-//            em.persist(usuario);
-//            return true;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
-//
-//    public boolean deletarUsuario(Cliente usuario) {
-//        try {
-//            em.remove(usuario);
-//            return true;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
+
     public void fecharConexao() {
         em.close();
     }

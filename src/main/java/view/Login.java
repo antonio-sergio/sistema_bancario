@@ -9,6 +9,10 @@ import javax.swing.JOptionPane;
 import model.Conta;
 import model.ContaPoupanca;
 import controller.Uteis;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.ContaCorrente;
 
 /**
@@ -107,37 +111,44 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int nmr_conta = Integer.parseInt(txt_nmro_conta.getText());
-        String senha = String.valueOf(txt_senha.getPassword());
-
-        try {
-            ContaPoupanca c;
-            c = Uteis.instanciaPoupanca(nmr_conta, senha);
-
-            if (c != null) {
-                conta = c;
-                this.dispose();
-                Menu m = new Menu();
-                m.setVisible(true);
-                m.pack();
+        try {                                         
+            int nmr_conta = Integer.parseInt(txt_nmro_conta.getText());
+            String senha = String.valueOf(txt_senha.getPassword());
+            String senhaHash = Uteis.hashSenha(senha);
+            
+            try {
+                ContaPoupanca c;
+                c = Uteis.instanciaPoupanca(nmr_conta, senhaHash);
+                
+                if (c != null) {
+                    conta = c;
+                    this.dispose();
+                    Menu m = new Menu();
+                    m.setVisible(true);
+                    m.pack();
+                }
+                
+            } catch (Exception e) {
             }
-
-        } catch (Exception e) {
-        }
-        try {
-            ContaCorrente c;
-            c = Uteis.instanciaCorrente(nmr_conta, senha);
-
-            if (c != null) {
-                conta = c;
-                this.dispose();
-                Menu m = new Menu();
-                m.setVisible(true);
-                m.pack();
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Conta e/ou senha incorretos");
+            try {
+                ContaCorrente c;
+                c = Uteis.instanciaCorrente(nmr_conta, senhaHash);
+                
+                if (c != null) {
+                    conta = c;
+                    this.dispose();
+                    Menu m = new Menu();
+                    m.setVisible(true);
+                    m.pack();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Conta e/ou senha incorretos");
+                }
+            } catch (Exception e) {
             }
-        } catch (Exception e) {
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

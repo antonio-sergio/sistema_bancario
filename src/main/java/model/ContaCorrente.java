@@ -71,5 +71,9 @@ public class ContaCorrente extends Conta {
             }
         }
     }
+    
+    public void transferir(int nmroContaDestino, double valor){
+        super.transferir(nmroContaDestino, valor);
+    }
 
 }

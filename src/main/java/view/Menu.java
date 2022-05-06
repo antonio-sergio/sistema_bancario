@@ -41,6 +41,7 @@ public class Menu extends javax.swing.JFrame {
             String lr = String.valueOf(aux.getLimiteRotativo());
             txt_limiteRotativo_saldo.setText(lr);
         }
+        dao.atualizar(conta);
     }
 
     /**
@@ -73,8 +74,19 @@ public class Menu extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txt_valor_transferencia = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
 
         jLabel1.setText("Hello World!!!");
 
@@ -119,6 +131,12 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel7.setText("transferir");
 
+        txt_conta_destino.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_conta_destinoFocusGained(evt);
+            }
+        });
+
         jLabel8.setText("Destino:");
 
         jLabel9.setText("Valor:");
@@ -130,12 +148,19 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Atualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -163,15 +188,6 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(btn_sacar))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txt_resultado))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(42, 42, 42)
-                                    .addComponent(txt_saldo)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txt_limiteRotativo)
                                 .addGap(41, 41, 41)
@@ -179,7 +195,19 @@ public class Menu extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(32, 32, 32)
-                                .addComponent(txt_tipo)))
+                                .addComponent(txt_tipo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txt_resultado))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(42, 42, 42)
+                                        .addComponent(txt_saldo)))))
                         .addGap(178, 178, 178)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
@@ -187,6 +215,7 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(txt_depositar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_depositar)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
                         .addComponent(jLabel7)
                         .addGap(375, 375, 375)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -230,7 +259,8 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(txt_resultado)
                     .addComponent(jLabel2)
                     .addComponent(txt_depositar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -271,6 +301,21 @@ public class Menu extends javax.swing.JFrame {
         mostraDados();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txt_conta_destinoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_conta_destinoFocusGained
+        
+    }//GEN-LAST:event_txt_conta_destinoFocusGained
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+       
+    }//GEN-LAST:event_formMouseEntered
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        
+    }//GEN-LAST:event_formFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -310,6 +355,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btn_depositar;
     private javax.swing.JButton btn_sacar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

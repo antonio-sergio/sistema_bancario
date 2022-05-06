@@ -5,6 +5,9 @@
  */
 package controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import model.ContaCorrente;
 import model.ContaPoupanca;
 
@@ -29,6 +32,17 @@ public class Uteis {
         return conta;
     }
     
-    
+    public static String hashSenha(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+        byte messageDigestSenha[] = algorithm.digest(senha.getBytes("UTF-8"));
+
+        StringBuilder hexStringSenhaAdmin = new StringBuilder();
+        for (byte b : messageDigestSenha) {
+                 hexStringSenhaAdmin.append(String.format("%02X", 0xFF & b));
+        }
+        String senhahexAdmin = hexStringSenhaAdmin.toString();
+        
+        return senhahexAdmin;
+    }
     
 }

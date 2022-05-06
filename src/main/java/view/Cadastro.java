@@ -6,8 +6,12 @@
 package view;
 
 import controller.DAO;
-import java.awt.HeadlessException;
+import controller.Uteis;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Contato;
 import model.Endereco;
@@ -460,7 +464,13 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void btn_cadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cadastrarMouseClicked
-        adicionarCliente();
+        try {
+            adicionarCliente();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_cadastrarMouseClicked
 
     private void txt_cpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cpfFocusLost
@@ -498,7 +508,7 @@ public class Cadastro extends javax.swing.JFrame {
         txt_telefone_recado.setText("");
     }
 
-    public void adicionarCliente() {
+    public void adicionarCliente() throws NoSuchAlgorithmException, UnsupportedEncodingException {
         String nome = txt_nome.getText();
         String cpf = txt_cpf.getText().replace(".", "").replace("-", "");
         String logradouro = txt_logradouro.getText();
@@ -510,9 +520,9 @@ public class Cadastro extends javax.swing.JFrame {
         String email = txt_email.getText();
         String pessoa_recado = txt_pessoa_recado.getText();
         String telefone_recado = txt_telefone_recado.getText();
-        String senha = String.valueOf(txt_password.getPassword());
-
-      
+        String senhaHash = Uteis.hashSenha(String.valueOf(txt_password.getPassword()));
+       
+        
 
         Endereco endereco = new Endereco(logradouro, cep, numero_residencia, complemento);
         Contato contato = new Contato(celular, telefone, email, telefone_recado, pessoa_recado);
@@ -521,7 +531,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         if (jComboBox_tipoConta.getSelectedIndex() == 0) {
             Cliente cliente = new Cliente(nome, cpf, endereco, contato);
-            ContaPoupanca cp = new ContaPoupanca(nmro, cliente, senha);
+            ContaPoupanca cp = new ContaPoupanca(nmro, cliente, senhaHash);
 
             DAO<Conta> dao = new DAO<>(Conta.class);
 
@@ -539,7 +549,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         } else {
             Cliente cliente = new Cliente(nome, cpf, endereco, contato);
-            ContaCorrente cc = new ContaCorrente(nmro, cliente, senha);
+            ContaCorrente cc = new ContaCorrente(nmro, cliente, senhaHash);
 
             DAO<Conta> dao = new DAO<>(Conta.class);
 
