@@ -8,10 +8,15 @@ package view;
 import controller.DAO;
 import jakarta.transaction.Transactional;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import model.Conta;
 import model.ContaCorrente;
 import static view.Login.conta;
-
+import controller.Uteis;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author antonio
@@ -537,9 +542,40 @@ public class Menu extends javax.swing.JFrame {
 
     private void btn_sacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sacarActionPerformed
         Double valor = Double.parseDouble(txt_sacar.getText());
-        conta.sacar(valor);
-        mostraDados();
-        limpaCampos();
+        
+        int resposta;
+        resposta = JOptionPane.showConfirmDialog(null, "Efetuar saque no valor de " + valor + "?","confirmar", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
+            if(valor <= conta.getSaldo()){
+//                String inputValue = JOptionPane.showInputDialog(“Please input a value”);
+                  String confirmaSenha = JOptionPane.showInputDialog("Digite sua senha para confirmar a operação: ");
+                try {
+                    String aux = Uteis.hashSenha(confirmaSenha);
+                    if(aux.equals(conta.getSenha())){
+                        conta.sacar(valor);
+                        mostraDados();
+                        limpaCampos();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Senha incorreta");
+                        JOptionPane.showMessageDialog(null, "Operação cancelada");
+
+                    }
+
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Seu saldo é insuficiente para efetuar essa operação");
+
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Operação cancelada");
+        }
+
+        
     }//GEN-LAST:event_btn_sacarActionPerformed
 
     private void btn_depositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_depositarActionPerformed

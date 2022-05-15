@@ -174,6 +174,7 @@ public class Conta {
             } else {
                 JOptionPane.showMessageDialog(null, "Saldo insuficiente! Seu saldo é " + this.saldo);
             }
+            return;
 
         } catch (Exception e) {
         }
@@ -191,9 +192,13 @@ public class Conta {
             } else {
                 JOptionPane.showMessageDialog(null, "Saldo insuficiente! Seu saldo é " + this.saldo);
             }
-
+            return;
         } catch (Exception e) {
+
         }
+        
+        JOptionPane.showMessageDialog(null, "A Conta informada não existe");
+
         
     }
 
