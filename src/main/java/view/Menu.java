@@ -7,6 +7,7 @@ package view;
 
 import controller.DAO;
 import jakarta.transaction.Transactional;
+import java.awt.Color;
 import model.Conta;
 import model.ContaCorrente;
 import static view.Login.conta;
@@ -24,6 +25,50 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         mostraDados();
+        visibleFalse();
+        txt_saldo.setVisible(false);
+        esconde_saldo.setVisible(false);
+        txt_tipo.setVisible(false);
+        txt_numero_conta.setVisible(false);
+        txt_limiteRotativo_saldo.setVisible(false);
+        btn_finalizar_tarefas.setVisible(false);
+        
+    }
+
+    public void mostraSaldo() {
+        txt_saldo.setVisible(true);
+        esconde_saldo.setVisible(true);
+        saldo_oculto.setVisible(false);
+        mostra_saldo.setVisible(false);
+        txt_tipo.setVisible(true);
+        txt_numero_conta.setVisible(true);
+        if(conta instanceof ContaCorrente){
+            
+        txt_limiteRotativo_saldo.setVisible(true);
+        }
+    }
+
+    public void ocultaSaldo() {
+        txt_saldo.setVisible(false);
+        esconde_saldo.setVisible(false);
+        saldo_oculto.setVisible(true);
+        mostra_saldo.setVisible(true);
+        txt_tipo.setVisible(false);
+        txt_numero_conta.setVisible(false);
+        txt_limiteRotativo_saldo.setVisible(false);
+    }
+
+    public void visibleFalse() {
+        panel_transferencia.setVisible(false);
+        panel_depositar.setVisible(false);
+        panel_sacar.setVisible(false);
+    }
+
+    public void limpaCampos() {
+        txt_conta_destino.setText("");
+        txt_valor_transferencia.setText("");
+        txt_depositar.setText("");
+        txt_sacar.setText("");
     }
 
     public void mostraDados() {
@@ -33,13 +78,19 @@ public class Menu extends javax.swing.JFrame {
         txt_limiteRotativo_saldo.setVisible(false);
         String saldo = String.valueOf(aux.getSaldo());
         txt_resultado.setText(aux.getCliente().getNome());
-        txt_saldo.setText(saldo);
+        txt_saldo.setText("R$: " + saldo);
         txt_tipo.setText(aux.getTipo());
+        String n = String.valueOf(conta.getNumeroDaConta());
+        txt_numero_conta.setText(n);
         if (conta instanceof ContaCorrente) {
+            if (txt_limiteRotativo_saldo.isVisible()) {
+
+                txt_limiteRotativo_saldo.setVisible(true);
+            }
             txt_limiteRotativo.setVisible(true);
             txt_limiteRotativo_saldo.setVisible(true);
             String lr = String.valueOf(aux.getLimiteRotativo());
-            txt_limiteRotativo_saldo.setText(lr);
+            txt_limiteRotativo_saldo.setText("R$: " + lr);
         }
         dao.atualizar(conta);
     }
@@ -53,30 +104,54 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txt_resultado = new javax.swing.JLabel();
-        txt_saldo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txt_depositar = new javax.swing.JTextField();
-        btn_depositar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txt_sacar = new javax.swing.JTextField();
-        btn_sacar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txt_tipo = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txt_resultado = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txt_saldo = new javax.swing.JLabel();
         txt_limiteRotativo = new javax.swing.JLabel();
         txt_limiteRotativo_saldo = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txt_conta_destino = new javax.swing.JTextField();
+        panel_logout = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        panel_transferencia = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        txt_conta_destino = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txt_valor_transferencia = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        btn_atalho_transferir = new javax.swing.JButton();
+        btn_atalho_depositar = new javax.swing.JButton();
+        btn_atalho_sacar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        panel_depositar = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_depositar = new javax.swing.JTextField();
+        btn_depositar = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        panel_sacar = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txt_sacar = new javax.swing.JTextField();
+        btn_sacar = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txt_numero_conta = new javax.swing.JLabel();
+        mostra_saldo = new javax.swing.JButton();
+        esconde_saldo = new javax.swing.JButton();
+        saldo_oculto = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        btn_finalizar_tarefas = new javax.swing.JButton();
+
+        jPopupMenu1.setBackground(new java.awt.Color(0, 0, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(10, 182, 155));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(950, 670));
+        setResizable(false);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
@@ -87,19 +162,229 @@ public class Menu extends javax.swing.JFrame {
                 formMouseEntered(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Hello World!!!");
+        jPanel1.setBackground(new java.awt.Color(10, 182, 155));
+        jPanel1.setBorder(null);
+        jPanel1.setPreferredSize(new java.awt.Dimension(950, 670));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel6.setForeground(java.awt.Color.white);
+        jLabel6.setText("Tipo de conta:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
+
+        txt_tipo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
+        txt_tipo.setForeground(java.awt.Color.white);
+        txt_tipo.setText("jLabel7");
+        jPanel1.add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 90, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/about.png"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        txt_resultado.setFont(new java.awt.Font("DejaVu Serif", 0, 18)); // NOI18N
+        txt_resultado.setForeground(java.awt.Color.white);
         txt_resultado.setText("jLabel2");
+        jPanel1.add(txt_resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
 
+        jLabel4.setForeground(java.awt.Color.white);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/salvando.png"))); // NOI18N
+        jLabel4.setText("Saldo:");
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 120, 70));
+
+        txt_saldo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
+        txt_saldo.setForeground(java.awt.Color.white);
         txt_saldo.setText("jLabel2");
+        jPanel1.add(txt_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 90, -1));
 
-        jLabel2.setText("depositar");
+        txt_limiteRotativo.setForeground(java.awt.Color.white);
+        txt_limiteRotativo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/emprestimo.png"))); // NOI18N
+        txt_limiteRotativo.setText("Rotativo:");
+        jPanel1.add(txt_limiteRotativo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
 
-        btn_depositar.setText("depositar");
+        txt_limiteRotativo_saldo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
+        txt_limiteRotativo_saldo.setForeground(java.awt.Color.white);
+        txt_limiteRotativo_saldo.setText("jLabel8");
+        jPanel1.add(txt_limiteRotativo_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 250, 90, 50));
+
+        panel_logout.setBackground(new java.awt.Color(10, 182, 155));
+        panel_logout.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel10.setBackground(new java.awt.Color(10, 182, 155));
+        jLabel10.setForeground(java.awt.Color.white);
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/exit.png"))); // NOI18N
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel10MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel10MouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_logoutLayout = new javax.swing.GroupLayout(panel_logout);
+        panel_logout.setLayout(panel_logoutLayout);
+        panel_logoutLayout.setHorizontalGroup(
+            panel_logoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_logoutLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panel_logoutLayout.setVerticalGroup(
+            panel_logoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(panel_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, -1, -1));
+
+        panel_transferencia.setBackground(new java.awt.Color(10, 182, 155));
+        panel_transferencia.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel_transferencia.setForeground(java.awt.Color.white);
+        panel_transferencia.setComponentPopupMenu(jPopupMenu1);
+        panel_transferencia.setPreferredSize(new java.awt.Dimension(250, 200));
+        panel_transferencia.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                panel_transferenciaFocusLost(evt);
+            }
+        });
+        panel_transferencia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_transferenciaMouseExited(evt);
+            }
+        });
+        panel_transferencia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setForeground(java.awt.Color.white);
+        jLabel8.setText("Destino:");
+        panel_transferencia.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+
+        txt_conta_destino.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_conta_destinoFocusGained(evt);
+            }
+        });
+        panel_transferencia.add(txt_conta_destino, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 112, -1));
+
+        jLabel9.setForeground(java.awt.Color.white);
+        jLabel9.setText("Valor:");
+        panel_transferencia.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, 30));
+        panel_transferencia.add(txt_valor_transferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 112, -1));
+
+        jButton1.setBackground(new java.awt.Color(34, 172, 26));
+        jButton1.setForeground(java.awt.Color.white);
+        jButton1.setText("Transferir");
+        jButton1.setPreferredSize(new java.awt.Dimension(100, 30));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton1MouseExited(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        panel_transferencia.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(194, 41, 50));
+        jButton3.setForeground(java.awt.Color.white);
+        jButton3.setText("Cancelar");
+        jButton3.setPreferredSize(new java.awt.Dimension(100, 30));
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        panel_transferencia.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
+
+        jPanel1.add(panel_transferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 300, -1));
+
+        btn_atalho_transferir.setBackground(new java.awt.Color(9, 131, 112));
+        btn_atalho_transferir.setFont(new java.awt.Font("Cantarell Extra Bold", 0, 18)); // NOI18N
+        btn_atalho_transferir.setForeground(java.awt.Color.white);
+        btn_atalho_transferir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/transferir-dinheiro.png"))); // NOI18N
+        btn_atalho_transferir.setText("Transferência");
+        btn_atalho_transferir.setBorder(null);
+        btn_atalho_transferir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_atalho_transferir.setDisabledIcon(null);
+        btn_atalho_transferir.setPreferredSize(new java.awt.Dimension(180, 25));
+        btn_atalho_transferir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_atalho_transferirMouseClicked(evt);
+            }
+        });
+        btn_atalho_transferir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_atalho_transferirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_atalho_transferir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 180, 40));
+
+        btn_atalho_depositar.setBackground(new java.awt.Color(9, 131, 112));
+        btn_atalho_depositar.setFont(new java.awt.Font("Cantarell Extra Bold", 0, 18)); // NOI18N
+        btn_atalho_depositar.setForeground(java.awt.Color.white);
+        btn_atalho_depositar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/deposito.png"))); // NOI18N
+        btn_atalho_depositar.setText("Depósito");
+        btn_atalho_depositar.setBorder(null);
+        btn_atalho_depositar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_atalho_depositar.setDisabledIcon(null);
+        btn_atalho_depositar.setPreferredSize(new java.awt.Dimension(180, 25));
+        btn_atalho_depositar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_atalho_depositarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btn_atalho_depositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 180, 40));
+
+        btn_atalho_sacar.setBackground(new java.awt.Color(9, 131, 112));
+        btn_atalho_sacar.setFont(new java.awt.Font("Cantarell Extra Bold", 0, 18)); // NOI18N
+        btn_atalho_sacar.setForeground(java.awt.Color.white);
+        btn_atalho_sacar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/saco-de-dinheiro-em-dolares-na-mao.png"))); // NOI18N
+        btn_atalho_sacar.setText("Saque");
+        btn_atalho_sacar.setBorder(null);
+        btn_atalho_sacar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_atalho_sacar.setDisabledIcon(null);
+        btn_atalho_sacar.setPreferredSize(new java.awt.Dimension(180, 25));
+        btn_atalho_sacar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_atalho_sacarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btn_atalho_sacar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 180, 40));
+
+        jLabel1.setFont(new java.awt.Font("DejaVu Serif", 0, 18)); // NOI18N
+        jLabel1.setForeground(java.awt.Color.white);
+        jLabel1.setText("Bem-vindo,");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
+
+        panel_depositar.setBackground(new java.awt.Color(10, 182, 155));
+        panel_depositar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel_depositar.setForeground(java.awt.Color.white);
+        panel_depositar.setPreferredSize(new java.awt.Dimension(250, 200));
+        panel_depositar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setForeground(java.awt.Color.white);
+        jLabel2.setText("Valor:");
+        panel_depositar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+        panel_depositar.add(txt_depositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 117, -1));
+
+        btn_depositar.setBackground(new java.awt.Color(34, 172, 26));
+        btn_depositar.setForeground(java.awt.Color.white);
+        btn_depositar.setText("Depositar");
+        btn_depositar.setPreferredSize(new java.awt.Dimension(100, 30));
         btn_depositar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_depositarMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_depositarMouseExited(evt);
             }
         });
         btn_depositar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,174 +392,143 @@ public class Menu extends javax.swing.JFrame {
                 btn_depositarActionPerformed(evt);
             }
         });
+        panel_depositar.add(btn_depositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
-        jLabel3.setText("sacar");
+        jButton6.setBackground(new java.awt.Color(194, 41, 50));
+        jButton6.setForeground(java.awt.Color.white);
+        jButton6.setText("Cancelar");
+        jButton6.setPreferredSize(new java.awt.Dimension(100, 30));
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+        panel_depositar.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
 
-        btn_sacar.setText("sacar");
+        jPanel1.add(panel_depositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, 300, -1));
+
+        panel_sacar.setBackground(new java.awt.Color(10, 182, 155));
+        panel_sacar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel_sacar.setForeground(java.awt.Color.white);
+        panel_sacar.setPreferredSize(new java.awt.Dimension(250, 200));
+
+        jLabel3.setForeground(java.awt.Color.white);
+        jLabel3.setText("Valor:");
+        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        btn_sacar.setBackground(new java.awt.Color(34, 172, 26));
+        btn_sacar.setForeground(java.awt.Color.white);
+        btn_sacar.setText("Sacar");
+        btn_sacar.setPreferredSize(new java.awt.Dimension(100, 30));
         btn_sacar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_sacarActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Saldo:");
-
-        jLabel5.setText("Cliente:");
-
-        jLabel6.setText("Tipo de conta:");
-
-        txt_tipo.setText("jLabel7");
-
-        txt_limiteRotativo.setText("Limite Rotativo:");
-
-        txt_limiteRotativo_saldo.setText("jLabel8");
-
-        jLabel7.setText("transferir");
-
-        txt_conta_destino.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_conta_destinoFocusGained(evt);
+        jButton7.setBackground(new java.awt.Color(194, 41, 50));
+        jButton7.setForeground(java.awt.Color.white);
+        jButton7.setText("Cancelar");
+        jButton7.setPreferredSize(new java.awt.Dimension(100, 30));
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
             }
         });
 
-        jLabel8.setText("Destino:");
-
-        jLabel9.setText("Valor:");
-
-        jButton1.setText("Transferir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Atualizar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_conta_destino)
-                                    .addComponent(txt_valor_transferencia, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
-                                .addGap(99, 99, 99))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(137, 137, 137)))
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_sacar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(btn_sacar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txt_limiteRotativo)
-                                .addGap(41, 41, 41)
-                                .addComponent(txt_limiteRotativo_saldo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(32, 32, 32)
-                                .addComponent(txt_tipo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_resultado))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(42, 42, 42)
-                                        .addComponent(txt_saldo)))))
-                        .addGap(178, 178, 178)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_depositar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_depositar)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel7)
-                        .addGap(375, 375, 375)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout panel_sacarLayout = new javax.swing.GroupLayout(panel_sacar);
+        panel_sacar.setLayout(panel_sacarLayout);
+        panel_sacarLayout.setHorizontalGroup(
+            panel_sacarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_sacarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_sacar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
+            .addGroup(panel_sacarLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(btn_sacar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txt_conta_destino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(txt_valor_transferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
-                                .addComponent(jButton1))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_sacar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_sacar)
-                        .addGap(2, 2, 2)))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_tipo))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_resultado)
-                    .addComponent(jLabel2)
-                    .addComponent(txt_depositar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_saldo)
-                        .addComponent(jLabel4))
-                    .addComponent(btn_depositar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_limiteRotativo)
-                    .addComponent(txt_limiteRotativo_saldo))
-                .addContainerGap(50, Short.MAX_VALUE))
+        panel_sacarLayout.setVerticalGroup(
+            panel_sacarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_sacarLayout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addGroup(panel_sacarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_sacar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(56, 56, 56)
+                .addGroup(panel_sacarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_sacar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
+
+        jPanel1.add(panel_sacar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 420, 300, -1));
+
+        jLabel7.setForeground(java.awt.Color.white);
+        jLabel7.setText("Nº da conta:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, -1, -1));
+
+        txt_numero_conta.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
+        txt_numero_conta.setForeground(java.awt.Color.white);
+        txt_numero_conta.setText("jLabel11");
+        txt_numero_conta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(txt_numero_conta, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 30, 110, 40));
+
+        mostra_saldo.setBackground(new java.awt.Color(9, 131, 112));
+        mostra_saldo.setForeground(java.awt.Color.white);
+        mostra_saldo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/show.png"))); // NOI18N
+        mostra_saldo.setText("Mostrar Dados");
+        mostra_saldo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostra_saldoMouseClicked(evt);
+            }
+        });
+        jPanel1.add(mostra_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 40));
+
+        esconde_saldo.setBackground(new java.awt.Color(9, 131, 112));
+        esconde_saldo.setForeground(java.awt.Color.white);
+        esconde_saldo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/private.png"))); // NOI18N
+        esconde_saldo.setText("Ocultar Dados");
+        esconde_saldo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                esconde_saldoMouseClicked(evt);
+            }
+        });
+        jPanel1.add(esconde_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 40));
+
+        saldo_oculto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/barra-de-carga.png"))); // NOI18N
+        jPanel1.add(saldo_oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 90, 60));
+
+        jButton2.setBackground(new java.awt.Color(9, 131, 112));
+        jButton2.setForeground(java.awt.Color.white);
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/lista-de-tarefas.png"))); // NOI18N
+        jButton2.setText("Multi-Tarefas");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, 40));
+
+        btn_finalizar_tarefas.setBackground(new java.awt.Color(9, 131, 112));
+        btn_finalizar_tarefas.setForeground(java.awt.Color.white);
+        btn_finalizar_tarefas.setText("Finalizar");
+        btn_finalizar_tarefas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_finalizar_tarefasMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btn_finalizar_tarefas, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 630, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 954, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_depositarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_depositarMouseClicked
@@ -285,13 +539,14 @@ public class Menu extends javax.swing.JFrame {
         Double valor = Double.parseDouble(txt_sacar.getText());
         conta.sacar(valor);
         mostraDados();
+        limpaCampos();
     }//GEN-LAST:event_btn_sacarActionPerformed
 
     private void btn_depositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_depositarActionPerformed
         Double valor = Double.parseDouble(txt_depositar.getText());
         conta.depositar(valor);
         mostraDados();
-
+        limpaCampos();
     }//GEN-LAST:event_btn_depositarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -299,22 +554,152 @@ public class Menu extends javax.swing.JFrame {
         double valor = Double.parseDouble(txt_valor_transferencia.getText());
         conta.transferir(numeroDestino, valor);
         mostraDados();
+        limpaCampos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void txt_conta_destinoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_conta_destinoFocusGained
-        
+
     }//GEN-LAST:event_txt_conta_destinoFocusGained
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-       
+
     }//GEN-LAST:event_formMouseEntered
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
-        
+
     }//GEN-LAST:event_formFocusGained
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseEntered
+        Color color = new Color(0, 229, 193);
+        panel_logout.setBackground(color);
+    }//GEN-LAST:event_jLabel10MouseEntered
+
+    private void jLabel10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseExited
+        Color color = new Color(10, 182, 155);
+        panel_logout.setBackground(color);
+    }//GEN-LAST:event_jLabel10MouseExited
+
+    private void btn_atalho_transferirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_atalho_transferirMouseClicked
+        if (panel_transferencia.isVisible() == false) {
+            panel_transferencia.setVisible(true);
+        } else if (panel_transferencia.isVisible() == true) {
+            panel_transferencia.setVisible(false);
+        }
+
+        if (panel_depositar.isVisible() == true) {
+            panel_depositar.setVisible(false);
+        }
+
+        if (panel_sacar.isVisible() == true) {
+            panel_sacar.setVisible(false);
+        }
+
+    }//GEN-LAST:event_btn_atalho_transferirMouseClicked
+
+    private void panel_transferenciaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panel_transferenciaFocusLost
+
+    }//GEN-LAST:event_panel_transferenciaFocusLost
+
+    private void panel_transferenciaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_transferenciaMouseExited
+
+    }//GEN-LAST:event_panel_transferenciaMouseExited
+
+    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+//        panel_transferencia.setVisible(false);
+    }//GEN-LAST:event_jButton1MouseExited
+
+    private void btn_atalho_depositarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_atalho_depositarMouseClicked
+        if (panel_depositar.isVisible() == false) {
+            panel_depositar.setVisible(true);
+        } else if (panel_depositar.isVisible() == true) {
+            panel_depositar.setVisible(false);
+        }
+
+        if (panel_transferencia.isVisible() == true) {
+            panel_transferencia.setVisible(false);
+        }
+
+        if (panel_sacar.isVisible() == true) {
+            panel_sacar.setVisible(false);
+        }
+
+    }//GEN-LAST:event_btn_atalho_depositarMouseClicked
+
+    private void btn_depositarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_depositarMouseExited
+//        panel_depositar.setVisible(false);
+
+    }//GEN-LAST:event_btn_depositarMouseExited
+
+    private void btn_atalho_sacarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_atalho_sacarMouseClicked
+        if (panel_sacar.isVisible() == false) {
+            panel_sacar.setVisible(true);
+        } else if (panel_sacar.isVisible() == true) {
+            panel_sacar.setVisible(false);
+        }
+
+        if (panel_depositar.isVisible() == true) {
+            panel_depositar.setVisible(false);
+        }
+
+        if (panel_transferencia.isVisible() == true) {
+            panel_transferencia.setVisible(false);
+        }
+    }//GEN-LAST:event_btn_atalho_sacarMouseClicked
+
+    private void btn_atalho_transferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atalho_transferirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_atalho_transferirActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        visibleFalse();
+        limpaCampos();
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        visibleFalse();
+        limpaCampos();
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        visibleFalse();
+        limpaCampos();
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void mostra_saldoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostra_saldoMouseClicked
+        mostraSaldo();
+    }//GEN-LAST:event_mostra_saldoMouseClicked
+
+    private void esconde_saldoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_esconde_saldoMouseClicked
+        ocultaSaldo();
+    }//GEN-LAST:event_esconde_saldoMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        if(panel_depositar.isVisible() & panel_sacar.isVisible() & panel_transferencia.isVisible()){
+            panel_depositar.setVisible(false);
+            panel_sacar.setVisible(false);
+            panel_transferencia.setVisible(false);
+            btn_finalizar_tarefas.setVisible(false);
+        }else{
+            panel_depositar.setVisible(true);
+            panel_sacar.setVisible(true);
+            panel_transferencia.setVisible(true);
+            btn_finalizar_tarefas.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void btn_finalizar_tarefasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_finalizar_tarefasMouseClicked
+        panel_depositar.setVisible(false);
+        panel_sacar.setVisible(false);
+        panel_transferencia.setVisible(false);
+        btn_finalizar_tarefas.setVisible(false);
+
+        limpaCampos();
+    }//GEN-LAST:event_btn_finalizar_tarefasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -352,11 +737,20 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_atalho_depositar;
+    private javax.swing.JButton btn_atalho_sacar;
+    private javax.swing.JButton btn_atalho_transferir;
     private javax.swing.JButton btn_depositar;
+    private javax.swing.JButton btn_finalizar_tarefas;
     private javax.swing.JButton btn_sacar;
+    private javax.swing.JButton esconde_saldo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -365,10 +759,19 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JButton mostra_saldo;
+    private javax.swing.JPanel panel_depositar;
+    private javax.swing.JPanel panel_logout;
+    private javax.swing.JPanel panel_sacar;
+    private javax.swing.JPanel panel_transferencia;
+    private javax.swing.JLabel saldo_oculto;
     private javax.swing.JTextField txt_conta_destino;
     private javax.swing.JTextField txt_depositar;
     private javax.swing.JLabel txt_limiteRotativo;
     private javax.swing.JLabel txt_limiteRotativo_saldo;
+    private javax.swing.JLabel txt_numero_conta;
     private javax.swing.JLabel txt_resultado;
     private javax.swing.JTextField txt_sacar;
     private javax.swing.JLabel txt_saldo;
