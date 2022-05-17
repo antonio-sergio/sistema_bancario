@@ -6,6 +6,7 @@
 package view;
 
 import controller.DAO;
+import controller.UsuarioDAO;
 import jakarta.transaction.Transactional;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -39,7 +40,9 @@ public class Menu extends javax.swing.JFrame {
         btn_finalizar_tarefas.setVisible(false);
         
     }
-
+    
+    
+    
     public void mostraSaldo() {
         txt_saldo.setVisible(true);
         esconde_saldo.setVisible(true);
@@ -75,8 +78,9 @@ public class Menu extends javax.swing.JFrame {
         txt_depositar.setText("");
         txt_sacar.setText("");
     }
-
-    public void mostraDados() {
+    
+    
+    public  void mostraDados() {
         DAO<Conta> dao = new DAO<>(Conta.class);
         Conta aux = dao.obterPorId(conta.getId());
         txt_limiteRotativo.setVisible(false);
@@ -147,8 +151,10 @@ public class Menu extends javax.swing.JFrame {
         mostra_saldo = new javax.swing.JButton();
         esconde_saldo = new javax.swing.JButton();
         saldo_oculto = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btn_saque_facil = new javax.swing.JButton();
         btn_finalizar_tarefas = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jPopupMenu1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -509,16 +515,16 @@ public class Menu extends javax.swing.JFrame {
         saldo_oculto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/barra-de-carga.png"))); // NOI18N
         jPanel1.add(saldo_oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 90, 60));
 
-        jButton2.setBackground(new java.awt.Color(9, 131, 112));
-        jButton2.setForeground(java.awt.Color.white);
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/lista-de-tarefas.png"))); // NOI18N
-        jButton2.setText("Multi-Tarefas");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_saque_facil.setBackground(new java.awt.Color(9, 131, 112));
+        btn_saque_facil.setForeground(java.awt.Color.white);
+        btn_saque_facil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/saco-de-dinheiro-em-dolares-na-mao.png"))); // NOI18N
+        btn_saque_facil.setText("Saque Fácil");
+        btn_saque_facil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btn_saque_facilMouseClicked(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, 40));
+        jPanel1.add(btn_saque_facil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 180, 40));
 
         btn_finalizar_tarefas.setBackground(new java.awt.Color(9, 131, 112));
         btn_finalizar_tarefas.setForeground(java.awt.Color.white);
@@ -529,6 +535,25 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_finalizar_tarefas, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 630, -1, -1));
+
+        jButton4.setBackground(new java.awt.Color(9, 131, 112));
+        jButton4.setForeground(java.awt.Color.white);
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/lista-de-tarefas.png"))); // NOI18N
+        jButton4.setText("Multi-Tarefas");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, 40));
+
+        jButton2.setText("atualizar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 954, -1));
 
@@ -542,30 +567,15 @@ public class Menu extends javax.swing.JFrame {
 
     private void btn_sacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sacarActionPerformed
         Double valor = Double.parseDouble(txt_sacar.getText());
-        
+        view.SaqueFacil.val = txt_sacar.getText();
         int resposta;
         resposta = JOptionPane.showConfirmDialog(null, "Efetuar saque no valor de " + valor + "?","confirmar", JOptionPane.YES_NO_OPTION);
         if (resposta == JOptionPane.YES_OPTION) {
             if(valor <= conta.getSaldo()){
 //                String inputValue = JOptionPane.showInputDialog(“Please input a value”);
-                  String confirmaSenha = JOptionPane.showInputDialog("Digite sua senha para confirmar a operação: ");
-                try {
-                    String aux = Uteis.hashSenha(confirmaSenha);
-                    if(aux.equals(conta.getSenha())){
-                        conta.sacar(valor);
-                        mostraDados();
-                        limpaCampos();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Senha incorreta");
-                        JOptionPane.showMessageDialog(null, "Operação cancelada");
-
-                    }
-
-                } catch (NoSuchAlgorithmException ex) {
-                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                ConfirmaSenha cs = new ConfirmaSenha();
+                cs.pack();
+                cs.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Seu saldo é insuficiente para efetuar essa operação");
 
@@ -574,8 +584,9 @@ public class Menu extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Operação cancelada");
         }
-
         
+        
+        mostraDados();
     }//GEN-LAST:event_btn_sacarActionPerformed
 
     private void btn_depositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_depositarActionPerformed
@@ -585,12 +596,40 @@ public class Menu extends javax.swing.JFrame {
         limpaCampos();
     }//GEN-LAST:event_btn_depositarActionPerformed
 
+    
+    public static int destino;
+    public static double valorATrnsferir;
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int numeroDestino = Integer.parseInt(txt_conta_destino.getText());
         double valor = Double.parseDouble(txt_valor_transferencia.getText());
-        conta.transferir(numeroDestino, valor);
-        mostraDados();
-        limpaCampos();
+        int numeroDestino = Integer.parseInt(txt_conta_destino.getText());
+        valorATrnsferir = valor;
+        destino = numeroDestino;
+        UsuarioDAO ud = new UsuarioDAO();
+        try {
+            Conta aux = new Conta();
+            aux = ud.getDestino(numeroDestino);
+            int resposta;
+            resposta = JOptionPane.showConfirmDialog(null, "Transferir " + valor + " para "+ aux.getCliente().getNome() + " ?","confirmar", JOptionPane.YES_NO_OPTION);
+            
+            if(resposta == JOptionPane.YES_OPTION){
+                ConfirmaSenhaTransferencia cst = new ConfirmaSenhaTransferencia();
+                cst.pack();
+                cst.setVisible(true);
+            
+                mostraDados();
+                limpaCampos();
+            }else{
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Conta inexistente");
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txt_conta_destinoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_conta_destinoFocusGained
@@ -713,20 +752,13 @@ public class Menu extends javax.swing.JFrame {
         ocultaSaldo();
     }//GEN-LAST:event_esconde_saldoMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        if(panel_depositar.isVisible() & panel_sacar.isVisible() & panel_transferencia.isVisible()){
-            panel_depositar.setVisible(false);
-            panel_sacar.setVisible(false);
-            panel_transferencia.setVisible(false);
-            btn_finalizar_tarefas.setVisible(false);
-        }else{
-            panel_depositar.setVisible(true);
-            panel_sacar.setVisible(true);
-            panel_transferencia.setVisible(true);
-            btn_finalizar_tarefas.setVisible(true);
-        }
+    private void btn_saque_facilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saque_facilMouseClicked
+        this.dispose();
+        SaqueFacil sf = new SaqueFacil();
+        sf.pack();
+        sf.setVisible(true);
         
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_btn_saque_facilMouseClicked
 
     private void btn_finalizar_tarefasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_finalizar_tarefasMouseClicked
         panel_depositar.setVisible(false);
@@ -736,6 +768,14 @@ public class Menu extends javax.swing.JFrame {
 
         limpaCampos();
     }//GEN-LAST:event_btn_finalizar_tarefasMouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        mostraDados();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -779,10 +819,12 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btn_depositar;
     private javax.swing.JButton btn_finalizar_tarefas;
     private javax.swing.JButton btn_sacar;
+    private javax.swing.JButton btn_saque_facil;
     private javax.swing.JButton esconde_saldo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;

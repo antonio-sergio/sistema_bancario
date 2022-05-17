@@ -13,6 +13,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
+import model.Conta;
 
 import model.ContaCorrente;
 import model.ContaPoupanca;
@@ -74,6 +75,20 @@ public class UsuarioDAO {
 
         try {
             ContaCorrente conta = (ContaCorrente) em.createQuery("SELECT c from Conta c where c.numeroDaConta =:numeroDaConta")
+                    .setParameter("numeroDaConta", numeroDaConta)
+                    .getSingleResult();
+            this.fecharConexao();
+            return conta;
+        } catch (NoResultException e) {
+            System.out.println("Conta não encontrada" + e);
+            return null;
+        }
+    }
+    
+    public Conta getDestino(int numeroDaConta) {
+
+        try {
+            Conta conta = (Conta) em.createQuery("SELECT c from Conta c where c.numeroDaConta =:numeroDaConta")
                     .setParameter("numeroDaConta", numeroDaConta)
                     .getSingleResult();
             this.fecharConexao();
