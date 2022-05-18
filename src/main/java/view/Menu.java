@@ -92,12 +92,11 @@ public class Menu extends javax.swing.JFrame {
         String n = String.valueOf(conta.getNumeroDaConta());
         txt_numero_conta.setText(n);
         if (conta instanceof ContaCorrente) {
-            if (txt_limiteRotativo_saldo.isVisible()) {
-
+            if(txt_tipo.isVisible()){
+                
                 txt_limiteRotativo_saldo.setVisible(true);
             }
             txt_limiteRotativo.setVisible(true);
-            txt_limiteRotativo_saldo.setVisible(true);
             String lr = String.valueOf(aux.getLimiteRotativo());
             txt_limiteRotativo_saldo.setText("R$: " + lr);
         }
@@ -182,12 +181,12 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel6.setForeground(java.awt.Color.white);
         jLabel6.setText("Tipo de conta:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
 
         txt_tipo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
         txt_tipo.setForeground(java.awt.Color.white);
         txt_tipo.setText("jLabel7");
-        jPanel1.add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 90, -1));
+        jPanel1.add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 90, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/about.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
@@ -201,22 +200,22 @@ public class Menu extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/salvando.png"))); // NOI18N
         jLabel4.setText("Saldo:");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 120, 70));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 120, 70));
 
         txt_saldo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
         txt_saldo.setForeground(java.awt.Color.white);
         txt_saldo.setText("jLabel2");
-        jPanel1.add(txt_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 90, -1));
+        jPanel1.add(txt_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, 130, -1));
 
         txt_limiteRotativo.setForeground(java.awt.Color.white);
         txt_limiteRotativo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/emprestimo.png"))); // NOI18N
         txt_limiteRotativo.setText("Rotativo:");
-        jPanel1.add(txt_limiteRotativo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
+        jPanel1.add(txt_limiteRotativo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 240, -1, -1));
 
         txt_limiteRotativo_saldo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
         txt_limiteRotativo_saldo.setForeground(java.awt.Color.white);
         txt_limiteRotativo_saldo.setText("jLabel8");
-        jPanel1.add(txt_limiteRotativo_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 250, 90, 50));
+        jPanel1.add(txt_limiteRotativo_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 250, 90, 50));
 
         panel_logout.setBackground(new java.awt.Color(10, 182, 155));
         panel_logout.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -482,13 +481,13 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel7.setForeground(java.awt.Color.white);
         jLabel7.setText("Nº da conta:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, -1, -1));
 
         txt_numero_conta.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
         txt_numero_conta.setForeground(java.awt.Color.white);
         txt_numero_conta.setText("jLabel11");
         txt_numero_conta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(txt_numero_conta, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 30, 110, 40));
+        jPanel1.add(txt_numero_conta, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 110, 40));
 
         mostra_saldo.setBackground(new java.awt.Color(9, 131, 112));
         mostra_saldo.setForeground(java.awt.Color.white);
@@ -513,7 +512,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(esconde_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 40));
 
         saldo_oculto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/barra-de-carga.png"))); // NOI18N
-        jPanel1.add(saldo_oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 90, 60));
+        jPanel1.add(saldo_oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 90, 60));
 
         btn_saque_facil.setBackground(new java.awt.Color(9, 131, 112));
         btn_saque_facil.setForeground(java.awt.Color.white);
@@ -547,13 +546,21 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, 40));
 
+        jButton2.setBackground(new java.awt.Color(9, 131, 112));
+        jButton2.setForeground(java.awt.Color.white);
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/refrescar.png"))); // NOI18N
         jButton2.setText("atualizar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, -1, -1));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 180, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 954, -1));
 
@@ -569,9 +576,9 @@ public class Menu extends javax.swing.JFrame {
         Double valor = Double.parseDouble(txt_sacar.getText());
         view.SaqueFacil.val = txt_sacar.getText();
         int resposta;
-        resposta = JOptionPane.showConfirmDialog(null, "Efetuar saque no valor de " + valor + "?","confirmar", JOptionPane.YES_NO_OPTION);
+        resposta = JOptionPane.showConfirmDialog(null, "Efetuar saque no valor de R$: " + valor + "?","Confirmar", JOptionPane.YES_NO_OPTION);
         if (resposta == JOptionPane.YES_OPTION) {
-            if(valor <= conta.getSaldo()){
+            if(valor <= conta.getSaldo() + conta.getLimiteRotativo()){
 //                String inputValue = JOptionPane.showInputDialog(“Please input a value”);
                 ConfirmaSenha cs = new ConfirmaSenha();
                 cs.pack();
@@ -610,7 +617,7 @@ public class Menu extends javax.swing.JFrame {
             Conta aux = new Conta();
             aux = ud.getDestino(numeroDestino);
             int resposta;
-            resposta = JOptionPane.showConfirmDialog(null, "Transferir " + valor + " para "+ aux.getCliente().getNome() + " ?","confirmar", JOptionPane.YES_NO_OPTION);
+            resposta = JOptionPane.showConfirmDialog(null, "Transferir R$ " + valor + " para "+ aux.getCliente().getNome() + " ?","Confirmar", JOptionPane.YES_NO_OPTION);
             
             if(resposta == JOptionPane.YES_OPTION){
                 ConfirmaSenhaTransferencia cst = new ConfirmaSenhaTransferencia();
@@ -776,6 +783,10 @@ public class Menu extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         mostraDados();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

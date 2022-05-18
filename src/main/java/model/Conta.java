@@ -120,7 +120,7 @@ public class Conta {
         this.saldo -= valor;
         this.setSaldo(saldo);
         dao.atualizar(this);
-        JOptionPane.showMessageDialog(null, "Saque efetuado no valor de: " + valor);
+        JOptionPane.showMessageDialog(null, "Saque efetuado no valor de R$: " + valor);
 
         return;
     }
@@ -130,7 +130,7 @@ public class Conta {
         this.limiteRotativo -= valor;
         this.setLimiteRotativo(limiteRotativo);
         dao.atualizar(this);
-        JOptionPane.showMessageDialog(null, "Limite cheque especial utilizado no valor de: " + valor);
+        JOptionPane.showMessageDialog(null, "Limite cheque especial utilizado no valor de R$: " + valor);
 
     }
 
@@ -139,7 +139,7 @@ public class Conta {
         this.saldo += valor;
         this.setSaldo(saldo);
         dao.atualizar(this);
-        JOptionPane.showMessageDialog(null, "Deposito efetuado no valor de: " + valor);
+        JOptionPane.showMessageDialog(null, "Deposito efetuado no valor de R$: " + valor);
 
     }
 
@@ -148,7 +148,7 @@ public class Conta {
         this.limiteRotativo += valor;
         this.setLimiteRotativo(limiteRotativo);
         dao.atualizar(this);
-        JOptionPane.showMessageDialog(null, "Pagamento cheque especial efetuado no valor de: " + valor);
+        JOptionPane.showMessageDialog(null, "Pagamento cheque especial efetuado no valor de R$: " + valor);
 
     }
 
@@ -166,13 +166,13 @@ public class Conta {
                     contaDestino.setSaldo(saldoDestinatario + valor);
                     dao.atualizar(this);
                     dao.atualizar(contaDestino);
-                    JOptionPane.showMessageDialog(null, "Transferido " + valor + " para " + contaDestino.getCliente().getNome());
+                    JOptionPane.showMessageDialog(null, "Transferido R$" + valor + " para " + contaDestino.getCliente().getNome());
                 } else {
                     JOptionPane.showMessageDialog(null, "Operação não realizada pois excede o limite da conta do destinatário");
 
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Saldo insuficiente! Seu saldo é " + this.saldo);
+                JOptionPane.showMessageDialog(null, "Saldo insuficiente! Seu saldo é R$" + this.saldo);
             }
             return;
 
@@ -187,10 +187,10 @@ public class Conta {
                 contaDestinoC.setSaldo(saldoDestinatario + valor);
                 dao.atualizar(this);
                 dao.atualizar(contaDestinoC);
-                JOptionPane.showMessageDialog(null, "Transferido " + valor + " para " + contaDestinoC.getCliente().getNome());
+                JOptionPane.showMessageDialog(null, "Transferido R$ " + valor + " para " + contaDestinoC.getCliente().getNome());
 
             } else {
-                JOptionPane.showMessageDialog(null, "Saldo insuficiente! Seu saldo é " + this.saldo);
+                JOptionPane.showMessageDialog(null, "Saldo insuficiente! Seu saldo é R$" + this.saldo);
             }
             return;
         } catch (Exception e) {

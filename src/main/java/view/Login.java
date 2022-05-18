@@ -27,6 +27,9 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        obrigatorio1.setVisible(false);
+        obrigatorio2.setVisible(false);
+        obrigatorio3.setVisible(false);
     }
 
     static Conta conta;
@@ -56,6 +59,9 @@ public class Login extends javax.swing.JFrame {
         txt_nmro_conta = new javax.swing.JTextField();
         panel_logout = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        obrigatorio2 = new javax.swing.JLabel();
+        obrigatorio1 = new javax.swing.JLabel();
+        obrigatorio3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -86,6 +92,11 @@ public class Login extends javax.swing.JFrame {
         txt_senha.setText("123");
         txt_senha.setAlignmentY(0.0F);
         txt_senha.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, null));
+        txt_senha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txt_senhaMouseExited(evt);
+            }
+        });
 
         panel_login.setBackground(new java.awt.Color(10, 182, 155));
         panel_login.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -232,28 +243,48 @@ public class Login extends javax.swing.JFrame {
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
         );
 
+        obrigatorio2.setForeground(java.awt.Color.red);
+        obrigatorio2.setText("*");
+
+        obrigatorio1.setForeground(java.awt.Color.red);
+        obrigatorio1.setText("*");
+
+        obrigatorio3.setForeground(java.awt.Color.red);
+        obrigatorio3.setText("* Campos obrigatórios");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel4)
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel2))
-                            .addComponent(txt_nmro_conta, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panel_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(obrigatorio1))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(obrigatorio2)))
+                                .addGap(5, 5, 5)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel4)
+                                        .addGap(16, 16, 16)
+                                        .addComponent(jLabel2))
+                                    .addComponent(txt_nmro_conta, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(panel_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(obrigatorio3)))
                         .addGap(34, 34, 34)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(41, 41, 41))
@@ -277,10 +308,16 @@ public class Login extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel2)))
                         .addGap(46, 46, 46)
-                        .addComponent(txt_nmro_conta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_nmro_conta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(obrigatorio1))
                         .addGap(40, 40, 40)
-                        .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(obrigatorio2))
+                        .addGap(18, 18, 18)
+                        .addComponent(obrigatorio3)
+                        .addGap(53, 53, 53)
                         .addComponent(panel_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -299,55 +336,65 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
-        Color color = new Color(0,229,193);
+        Color color = new Color(0, 229, 193);
         panel_login.setBackground(color);
 //        0,229,193
     }//GEN-LAST:event_jLabel3MouseEntered
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
-        Color color = new Color(10,182,155);
+        Color color = new Color(10, 182, 155);
         panel_login.setBackground(color);
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        String aux = String.valueOf(txt_senha.getPassword());
+        if (txt_nmro_conta.getText().equals("") || aux.equals("")) {
+            obrigatorio1.setVisible(true);
+            obrigatorio2.setVisible(true);
+            obrigatorio3.setVisible(true);
+        } else {
             try {
-            int nmr_conta = Integer.parseInt(txt_nmro_conta.getText());
-            String senha = String.valueOf(txt_senha.getPassword());
-            String senhaHash = Uteis.hashSenha(senha);
+                int nmr_conta = Integer.parseInt(txt_nmro_conta.getText());
+                String senha = String.valueOf(txt_senha.getPassword());
+                String senhaHash = Uteis.hashSenha(senha);
 
-            try {
-                ContaPoupanca c;
-                c = Uteis.instanciaPoupanca(nmr_conta, senhaHash);
+                try {
+                    ContaPoupanca c;
+                    c = Uteis.instanciaPoupanca(nmr_conta, senhaHash);
 
-                if (c != null) {
-                    conta = c;
-                    this.dispose();
-                    Menu m = new Menu();
-                    m.setVisible(true);
-                    m.pack();
+                    if (c != null) {
+                        conta = c;
+                        this.dispose();
+                        Menu m = new Menu();
+                        m.setVisible(true);
+                        m.pack();
+                    }
+
+                } catch (Exception e) {
                 }
+                try {
+                    ContaCorrente c;
+                    c = Uteis.instanciaCorrente(nmr_conta, senhaHash);
 
-            } catch (Exception e) {
-            }
-            try {
-                ContaCorrente c;
-                c = Uteis.instanciaCorrente(nmr_conta, senhaHash);
-
-                if (c != null) {
-                    conta = c;
-                    this.dispose();
-                    Menu m = new Menu();
-                    m.setVisible(true);
-                    m.pack();
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Conta e/ou senha incorretos");
+                    if (c != null) {
+                        conta = c;
+                        this.dispose();
+                        Menu m = new Menu();
+                        m.setVisible(true);
+                        m.pack();
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Conta e/ou senha incorretos");
+                    }
+                } catch (Exception e) {
                 }
-            } catch (Exception e) {
+                obrigatorio1.setVisible(false);
+                obrigatorio2.setVisible(false);
+                obrigatorio3.setVisible(false);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel3MouseClicked
 
@@ -356,14 +403,28 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_nmro_contaActionPerformed
 
     private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
-        Color color = new Color(0,229,193);
+        Color color = new Color(0, 229, 193);
         panel_logout.setBackground(color);
     }//GEN-LAST:event_jLabel6MouseEntered
 
     private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
-        Color color = new Color(10,182,155);
+        Color color = new Color(10, 182, 155);
         panel_logout.setBackground(color);
     }//GEN-LAST:event_jLabel6MouseExited
+
+    private void txt_senhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_senhaMouseExited
+        String aux = String.valueOf(txt_senha.getPassword());
+
+        if(!txt_nmro_conta.getText().equals("") && !aux.equals("")){
+            obrigatorio1.setVisible(false);
+            obrigatorio2.setVisible(false);
+            obrigatorio3.setVisible(false);
+        }else{
+            obrigatorio1.setVisible(true);
+            obrigatorio2.setVisible(true);
+            obrigatorio3.setVisible(true);
+        }
+    }//GEN-LAST:event_txt_senhaMouseExited
 
     /**
      * @param args the command line arguments
@@ -413,6 +474,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel obrigatorio1;
+    private javax.swing.JLabel obrigatorio2;
+    private javax.swing.JLabel obrigatorio3;
     private javax.swing.JPanel panel_login;
     private javax.swing.JPanel panel_logout;
     private javax.swing.JTextField txt_nmro_conta;
