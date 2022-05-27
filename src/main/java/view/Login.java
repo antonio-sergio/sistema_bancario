@@ -30,6 +30,7 @@ public class Login extends javax.swing.JFrame {
         obrigatorio1.setVisible(false);
         obrigatorio2.setVisible(false);
         obrigatorio3.setVisible(false);
+        validaCampo();
     }
 
     static Conta conta;
@@ -56,12 +57,14 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txt_nmro_conta = new javax.swing.JTextField();
         panel_logout = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         obrigatorio2 = new javax.swing.JLabel();
         obrigatorio1 = new javax.swing.JLabel();
         obrigatorio3 = new javax.swing.JLabel();
+        panel_logout1 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        txt_nmro_conta = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -89,7 +92,6 @@ public class Login extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(950, 670));
 
         txt_senha.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
-        txt_senha.setText("123");
         txt_senha.setAlignmentY(0.0F);
         txt_senha.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, null));
         txt_senha.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -197,17 +199,6 @@ public class Login extends javax.swing.JFrame {
         jLabel8.setForeground(java.awt.Color.white);
         jLabel8.setText("Senha:");
 
-        txt_nmro_conta.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
-        txt_nmro_conta.setText("123");
-        txt_nmro_conta.setAlignmentX(1.0F);
-        txt_nmro_conta.setAlignmentY(1.0F);
-        txt_nmro_conta.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, null));
-        txt_nmro_conta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nmro_contaActionPerformed(evt);
-            }
-        });
-
         panel_logout.setBackground(new java.awt.Color(10, 182, 155));
         panel_logout.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -240,7 +231,7 @@ public class Login extends javax.swing.JFrame {
         );
         panel_logoutLayout.setVerticalGroup(
             panel_logoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         obrigatorio2.setForeground(java.awt.Color.red);
@@ -252,48 +243,105 @@ public class Login extends javax.swing.JFrame {
         obrigatorio3.setForeground(java.awt.Color.red);
         obrigatorio3.setText("* Campos obrigatórios");
 
+        panel_logout1.setBackground(new java.awt.Color(10, 182, 155));
+        panel_logout1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_logout1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel10.setBackground(new java.awt.Color(10, 182, 155));
+        jLabel10.setForeground(java.awt.Color.white);
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/add2.png"))); // NOI18N
+        jLabel10.setText("Cadastro");
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel10MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel10MouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_logout1Layout = new javax.swing.GroupLayout(panel_logout1);
+        panel_logout1.setLayout(panel_logout1Layout);
+        panel_logout1Layout.setHorizontalGroup(
+            panel_logout1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_logout1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panel_logout1Layout.setVerticalGroup(
+            panel_logout1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_logout1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel10))
+        );
+
+        txt_nmro_conta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txt_nmro_conta.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        txt_nmro_conta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txt_nmro_contaMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(obrigatorio1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(obrigatorio1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txt_nmro_conta, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(obrigatorio2)))
-                                .addGap(5, 5, 5)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(obrigatorio3)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(obrigatorio2)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txt_senha)))))
+                                .addGap(44, 44, 44))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
+                                    .addComponent(panel_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(16, 16, 16)
-                                        .addComponent(jLabel2))
-                                    .addComponent(txt_nmro_conta, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(panel_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(68, 68, 68)
-                                .addComponent(obrigatorio3)))
-                        .addGap(34, 34, 34)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel2)))
+                                .addGap(86, 86, 86)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(panel_logout1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panel_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(41, 41, 41))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(panel_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel_logout1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(182, 182, 182)
@@ -307,22 +355,20 @@ public class Login extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel2)))
-                        .addGap(46, 46, 46)
+                        .addGap(38, 38, 38)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_nmro_conta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(obrigatorio1))
+                            .addComponent(obrigatorio1)
+                            .addComponent(txt_nmro_conta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(obrigatorio2))
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(obrigatorio2)
+                            .addComponent(txt_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(obrigatorio3)
-                        .addGap(53, 53, 53)
+                        .addGap(68, 68, 68)
                         .addComponent(panel_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 681));
@@ -331,6 +377,7 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel6MouseClicked
@@ -338,7 +385,7 @@ public class Login extends javax.swing.JFrame {
     private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
         Color color = new Color(0, 229, 193);
         panel_login.setBackground(color);
-//        0,229,193
+        validaCampo();
     }//GEN-LAST:event_jLabel3MouseEntered
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
@@ -352,6 +399,7 @@ public class Login extends javax.swing.JFrame {
             obrigatorio1.setVisible(true);
             obrigatorio2.setVisible(true);
             obrigatorio3.setVisible(true);
+
         } else {
             try {
                 int nmr_conta = Integer.parseInt(txt_nmro_conta.getText());
@@ -390,6 +438,7 @@ public class Login extends javax.swing.JFrame {
                 obrigatorio1.setVisible(false);
                 obrigatorio2.setVisible(false);
                 obrigatorio3.setVisible(false);
+
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnsupportedEncodingException ex) {
@@ -397,10 +446,6 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jLabel3MouseClicked
-
-    private void txt_nmro_contaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nmro_contaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nmro_contaActionPerformed
 
     private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
         Color color = new Color(0, 229, 193);
@@ -415,16 +460,51 @@ public class Login extends javax.swing.JFrame {
     private void txt_senhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_senhaMouseExited
         String aux = String.valueOf(txt_senha.getPassword());
 
-        if(!txt_nmro_conta.getText().equals("") && !aux.equals("")){
+        if (!txt_nmro_conta.getText().equals("") && !aux.equals("")) {
             obrigatorio1.setVisible(false);
             obrigatorio2.setVisible(false);
             obrigatorio3.setVisible(false);
-        }else{
+
+        } else {
             obrigatorio1.setVisible(true);
             obrigatorio2.setVisible(true);
             obrigatorio3.setVisible(true);
+
         }
+        
+        validaCampo();
     }//GEN-LAST:event_txt_senhaMouseExited
+
+    private void validaCampo() {
+        if (obrigatorio3.isVisible() || txt_nmro_conta.getText().equals("") || txt_senha.getPassword().toString().equals("")) {
+            jLabel3.setEnabled(false);
+            panel_login.setEnabled(false);
+        } else {
+            jLabel3.setEnabled(true);
+            panel_login.setEnabled(true);
+
+        }
+
+    }
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        this.dispose();
+        Cadastro c = new Cadastro();
+        c.pack();
+        c.setVisible(true);
+    }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10MouseEntered
+
+    private void jLabel10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10MouseExited
+
+    private void txt_nmro_contaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_nmro_contaMouseExited
+        validaCampo();
+    }//GEN-LAST:event_txt_nmro_contaMouseExited
 
     /**
      * @param args the command line arguments
@@ -463,6 +543,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -479,7 +560,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel obrigatorio3;
     private javax.swing.JPanel panel_login;
     private javax.swing.JPanel panel_logout;
-    private javax.swing.JTextField txt_nmro_conta;
+    private javax.swing.JPanel panel_logout1;
+    private javax.swing.JFormattedTextField txt_nmro_conta;
     private javax.swing.JPasswordField txt_senha;
     // End of variables declaration//GEN-END:variables
 }

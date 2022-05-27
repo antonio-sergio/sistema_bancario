@@ -16,8 +16,12 @@ import static view.Login.conta;
 import controller.Uteis;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
+import net.bytebuddy.asm.Advice;
+
 /**
  *
  * @author antonio
@@ -28,6 +32,9 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    
+    
+
     public Menu() {
         initComponents();
         mostraDados();
@@ -38,11 +45,12 @@ public class Menu extends javax.swing.JFrame {
         txt_numero_conta.setVisible(false);
         txt_limiteRotativo_saldo.setVisible(false);
         btn_finalizar_tarefas.setVisible(false);
+
         
     }
+
     
-    
-    
+
     public void mostraSaldo() {
         txt_saldo.setVisible(true);
         esconde_saldo.setVisible(true);
@@ -50,9 +58,9 @@ public class Menu extends javax.swing.JFrame {
         mostra_saldo.setVisible(false);
         txt_tipo.setVisible(true);
         txt_numero_conta.setVisible(true);
-        if(conta instanceof ContaCorrente){
-            
-        txt_limiteRotativo_saldo.setVisible(true);
+        if (conta instanceof ContaCorrente) {
+
+            txt_limiteRotativo_saldo.setVisible(true);
         }
     }
 
@@ -78,9 +86,8 @@ public class Menu extends javax.swing.JFrame {
         txt_depositar.setText("");
         txt_sacar.setText("");
     }
-    
-    
-    public  void mostraDados() {
+
+    public void mostraDados() {
         DAO<Conta> dao = new DAO<>(Conta.class);
         Conta aux = dao.obterPorId(conta.getId());
         txt_limiteRotativo.setVisible(false);
@@ -92,8 +99,8 @@ public class Menu extends javax.swing.JFrame {
         String n = String.valueOf(conta.getNumeroDaConta());
         txt_numero_conta.setText(n);
         if (conta instanceof ContaCorrente) {
-            if(txt_tipo.isVisible()){
-                
+            if (txt_tipo.isVisible()) {
+
                 txt_limiteRotativo_saldo.setVisible(true);
             }
             txt_limiteRotativo.setVisible(true);
@@ -153,7 +160,6 @@ public class Menu extends javax.swing.JFrame {
         btn_saque_facil = new javax.swing.JButton();
         btn_finalizar_tarefas = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         jPopupMenu1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -177,16 +183,31 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(10, 182, 155));
         jPanel1.setBorder(null);
         jPanel1.setPreferredSize(new java.awt.Dimension(950, 670));
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel1MouseMoved(evt);
+            }
+        });
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+        });
+        jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel1ComponentShown(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setForeground(java.awt.Color.white);
         jLabel6.setText("Tipo de conta:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
 
         txt_tipo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
         txt_tipo.setForeground(java.awt.Color.white);
         txt_tipo.setText("jLabel7");
-        jPanel1.add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 90, -1));
+        jPanel1.add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 160, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/about.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
@@ -200,22 +221,22 @@ public class Menu extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/salvando.png"))); // NOI18N
         jLabel4.setText("Saldo:");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 120, 70));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 120, 70));
 
         txt_saldo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
         txt_saldo.setForeground(java.awt.Color.white);
         txt_saldo.setText("jLabel2");
-        jPanel1.add(txt_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, 130, -1));
+        jPanel1.add(txt_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 130, -1));
 
         txt_limiteRotativo.setForeground(java.awt.Color.white);
         txt_limiteRotativo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/emprestimo.png"))); // NOI18N
         txt_limiteRotativo.setText("Rotativo:");
-        jPanel1.add(txt_limiteRotativo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 240, -1, -1));
+        jPanel1.add(txt_limiteRotativo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, -1, -1));
 
         txt_limiteRotativo_saldo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 18)); // NOI18N
         txt_limiteRotativo_saldo.setForeground(java.awt.Color.white);
         txt_limiteRotativo_saldo.setText("jLabel8");
-        jPanel1.add(txt_limiteRotativo_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 250, 90, 50));
+        jPanel1.add(txt_limiteRotativo_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 170, 160, 50));
 
         panel_logout.setBackground(new java.awt.Color(10, 182, 155));
         panel_logout.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -512,7 +533,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(esconde_saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 180, 40));
 
         saldo_oculto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/barra-de-carga.png"))); // NOI18N
-        jPanel1.add(saldo_oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 90, 60));
+        jPanel1.add(saldo_oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 90, 60));
 
         btn_saque_facil.setBackground(new java.awt.Color(9, 131, 112));
         btn_saque_facil.setForeground(java.awt.Color.white);
@@ -546,22 +567,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, 40));
 
-        jButton2.setBackground(new java.awt.Color(9, 131, 112));
-        jButton2.setForeground(java.awt.Color.white);
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my icons/refrescar.png"))); // NOI18N
-        jButton2.setText("atualizar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 180, 40));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 954, -1));
 
         pack();
@@ -576,23 +581,23 @@ public class Menu extends javax.swing.JFrame {
         Double valor = Double.parseDouble(txt_sacar.getText());
         view.SaqueFacil.val = txt_sacar.getText();
         int resposta;
-        resposta = JOptionPane.showConfirmDialog(null, "Efetuar saque no valor de R$: " + valor + "?","Confirmar", JOptionPane.YES_NO_OPTION);
+        resposta = JOptionPane.showConfirmDialog(null, "Efetuar saque no valor de R$: " + valor + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (resposta == JOptionPane.YES_OPTION) {
-            if(valor <= conta.getSaldo() + conta.getLimiteRotativo()){
+            if (valor <= conta.getSaldo() || valor <= conta.getLimiteRotativo()) {
 //                String inputValue = JOptionPane.showInputDialog(“Please input a value”);
                 ConfirmaSenha cs = new ConfirmaSenha();
                 cs.pack();
                 cs.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(null, "Seu saldo é insuficiente para efetuar essa operação");
+                limpaCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Seu saldo saldo é insuficiente para efetuar essa operação");
 
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Operação cancelada");
         }
-        
-        
+
         mostraDados();
     }//GEN-LAST:event_btn_sacarActionPerformed
 
@@ -603,10 +608,9 @@ public class Menu extends javax.swing.JFrame {
         limpaCampos();
     }//GEN-LAST:event_btn_depositarActionPerformed
 
-    
     public static int destino;
     public static double valorATrnsferir;
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         double valor = Double.parseDouble(txt_valor_transferencia.getText());
         int numeroDestino = Integer.parseInt(txt_conta_destino.getText());
@@ -617,26 +621,26 @@ public class Menu extends javax.swing.JFrame {
             Conta aux = new Conta();
             aux = ud.getDestino(numeroDestino);
             int resposta;
-            resposta = JOptionPane.showConfirmDialog(null, "Transferir R$ " + valor + " para "+ aux.getCliente().getNome() + " ?","Confirmar", JOptionPane.YES_NO_OPTION);
-            
-            if(resposta == JOptionPane.YES_OPTION){
+            resposta = JOptionPane.showConfirmDialog(null, "Transferir R$ " + valor + " para " + aux.getCliente().getNome() + " ?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+            if (resposta == JOptionPane.YES_OPTION) {
                 ConfirmaSenhaTransferencia cst = new ConfirmaSenhaTransferencia();
                 cst.pack();
                 cst.setVisible(true);
-            
+
                 mostraDados();
                 limpaCampos();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Operação cancelada");
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Conta inexistente");
         }
-        
-        
-        
-        
+
+        mostraDados();
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txt_conta_destinoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_conta_destinoFocusGained
@@ -652,7 +656,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formFocusGained
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        System.exit(0);
+        this.dispose();
+        Login login = new Login();
+        login.pack();
+        login.setVisible(true);
+        login.minimumSize();
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseEntered
@@ -764,7 +772,7 @@ public class Menu extends javax.swing.JFrame {
         SaqueFacil sf = new SaqueFacil();
         sf.pack();
         sf.setVisible(true);
-        
+
     }//GEN-LAST:event_btn_saque_facilMouseClicked
 
     private void btn_finalizar_tarefasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_finalizar_tarefasMouseClicked
@@ -777,16 +785,33 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_finalizar_tarefasMouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        // TODO add your handling code here:
+        if (btn_finalizar_tarefas.isVisible()) {
+            panel_depositar.setVisible(false);
+            panel_sacar.setVisible(false);
+            panel_transferencia.setVisible(false);
+            btn_finalizar_tarefas.setVisible(false);
+        } else {
+            panel_depositar.setVisible(true);
+            panel_sacar.setVisible(true);
+            panel_transferencia.setVisible(true);
+            btn_finalizar_tarefas.setVisible(true);
+        }
+
+
     }//GEN-LAST:event_jButton4MouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        mostraDados();
-    }//GEN-LAST:event_jButton2MouseClicked
+    private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
+        
+    }//GEN-LAST:event_jPanel1FocusGained
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
+
+
+    }//GEN-LAST:event_jPanel1ComponentShown
+
+    private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
+        mostraDados();
+    }//GEN-LAST:event_jPanel1MouseMoved
 
     /**
      * @param args the command line arguments
@@ -833,7 +858,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btn_saque_facil;
     private javax.swing.JButton esconde_saldo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;

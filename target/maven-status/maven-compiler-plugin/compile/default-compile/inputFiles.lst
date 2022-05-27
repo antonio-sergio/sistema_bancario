@@ -4,6 +4,8 @@
 /home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/model/Contato.java
 /home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/model/TestaConta.java
 /home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/view/Login.java
+/home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/view/SaqueFacil.java
+/home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/view/ConfirmaSenha.java
 /home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/model/Cliente.java
 /home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/model/Conta.java
 /home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/model/ContaCorrente.java
@@ -11,3 +13,4 @@
 /home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/view/Cadastro.java
 /home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/controller/Uteis.java
 /home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/view/Menu.java
+/home/antonio/NetBeansProjects/Sistema_Bancario/src/main/java/view/ConfirmaSenhaTransferencia.java

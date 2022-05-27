@@ -276,7 +276,7 @@ public class Cadastro extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jButton4.setText("jButton4");
+        jButton4.setText("login");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -422,7 +422,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         jTabbedPane_cadastro.addTab("Conta", jPanel5);
 
-        jPanel1.add(jTabbedPane_cadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 102, -1, -1));
+        jPanel1.add(jTabbedPane_cadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         jLabel12.setText("Cadastro de Clientes");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 37, -1, -1));
@@ -443,6 +443,7 @@ public class Cadastro extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_proximo_cpfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_proximo_cpfMouseClicked
